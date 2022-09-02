@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Tools\Translation\Exceptions;
 use App\Tools\Translation\ExceptionsTranslation;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class UserController extends Controller {
@@ -14,6 +15,8 @@ class UserController extends Controller {
         $name = $request->name ?? '';
         $email = $request->email ?? '';
         $password = $request->password ?? '';
+        $birth = $request->birth ?? null;
+        $company_id = $request->company_id ?? null;
 
         ExceptionsTranslation::validate(
             !!$name,
@@ -27,11 +30,17 @@ class UserController extends Controller {
             !!$password,
             Exceptions::USER_EMPTY_PASSWORD
         );
+        ExceptionsTranslation::validate(
+            !!$birth,
+            Exceptions::EMPTY_BIRTH
+        );
 
         $user = new User([
             'name' => $name,
             'email' => $email,
             'password' => $password,
+            'birth' => new Carbon($birth),
+            'company_id' => $company_id,
         ]);
 
         try {

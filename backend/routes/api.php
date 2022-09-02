@@ -14,16 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
 Route::group([ 'prefix' => 'app' ], function() {
     Route::post('create-user', 'App\Http\Controllers\UserController@createUser');
     Route::post('login', 'App\Http\Controllers\AuthController@authenticate');
 
     Route::middleware('auth:sanctum')->group(function() {
         Route::post('logout', 'App\Http\Controllers\AuthController@logout');
+        Route::post('create-company', 'App\Http\Controllers\CompanyController@createCompany');
+        Route::put('company/add-user/{companyId}', 'App\Http\Controllers\CompanyController@addUserInCompany');
     });
 });
 

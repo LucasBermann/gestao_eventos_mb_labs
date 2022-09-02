@@ -28,6 +28,24 @@ class Handler extends ExceptionHandler
     ];
 
     /**
+     * Render an exception into an HTTP response.
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Exception  $e
+     * @return \Illuminate\Http\Response
+     */
+    public function render($request, \Throwable $exception)
+    {
+        return response()->json([
+            'info' => 'error',
+            'code' => $exception->getCode(),
+            'message' => $exception->getMessage(),
+        ], 400);
+    }
+
+    /**
      * Register the exception handling callbacks for the application.
      *
      * @return void

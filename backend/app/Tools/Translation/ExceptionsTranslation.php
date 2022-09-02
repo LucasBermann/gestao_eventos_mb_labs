@@ -20,14 +20,16 @@ class ExceptionsTranslation
             $exceptionLang = new self::$languages[env('LANGUAGE', 'ptbr')]();
 
             throw new Exception(
-                $exceptionLang->getMessage($code)
+                $exceptionLang->getMessage($code),
+                $code
             );
         }
     }
     public static function throwNow(int $code) {
         $exceptionLang = new self::$languages[env('LANGUAGE', 'ptbr')]();
         throw new Exception(
-            $exceptionLang->getMessage($code)
+            $exceptionLang->getMessage($code),
+            $code
         );
     }
     public static function getMessage(int $code) {
