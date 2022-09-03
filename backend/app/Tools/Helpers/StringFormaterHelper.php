@@ -21,4 +21,10 @@ class StringFormaterHelper
         $documentNumberFormated = self::onlyNumbers($documentNumber);
         return strlen($documentNumberFormated) === 14;
     }
+
+    public static function isValidCardNumber(string $cardNumber) : bool
+    {
+        $cardFormated = self::onlyNumbers($cardNumber);
+        return strlen($cardFormated) === 16;
+    }
 }

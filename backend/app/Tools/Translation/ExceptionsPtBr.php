@@ -10,6 +10,7 @@ class ExceptionsPtBr extends ExceptionsLang
         parent::__construct(
             [
                 Exceptions::DEFAULT_ERROR => 'Ops... Ocorreu um erro inesperado, favor comunicar o suporte',
+                Exceptions::UNAUTHENTICATED => 'Desconectado - Faça o login para continuar',
                 Exceptions::USER_EMPTY_NAME => 'Erro - Nome não informado',
                 Exceptions::USER_EMPTY_EMAIL => 'Erro - Email não informado',
                 Exceptions::USER_EMPTY_PASSWORD => 'Erro - Senha não informada',
@@ -30,6 +31,13 @@ class ExceptionsPtBr extends ExceptionsLang
                 Exceptions::EMPTY_EVENT_DATE_TIME => 'Erro - Deve-se informar a data/hora para o evento',
                 Exceptions::EMPTY_EVENT_PARTIC_LIMIT => 'Erro - Deve-se informar a quantidade máxima de participantes do evento',
                 Exceptions::USER_WITHOUT_COMPANY => 'Erro - Usuário não vinculado a uma empresa',
+                Exceptions::EVENT_NOT_SELECTED => 'Erro - Evento não selecionado',
+                Exceptions::EMPTY_PAYMENT => 'Erro - Dados do pagamento não informados',
+                Exceptions::PAYMENT_CARD_NUMBER => 'Erro - Número do cartão não informado',
+                Exceptions::PAYMENT_HOLDER => 'Erro - Nome do titular do cartão não informado',
+                Exceptions::PAYMENT_EXPIRATION => 'Erro - Data de vencimento do cartão não informada',
+                Exceptions::PAYMENT_SECURITY_CODE => 'Erro - Cvv não informado',
+                Exceptions::PAYMENT_CARD_NUMBER_INVALID => 'Erro - Número do cartão inválido',
             ]
         );
     }

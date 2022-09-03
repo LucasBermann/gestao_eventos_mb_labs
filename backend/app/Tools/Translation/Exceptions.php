@@ -6,6 +6,7 @@ namespace App\Tools\Translation;
 class Exceptions
 {
     const DEFAULT_ERROR = 444;
+    const UNAUTHENTICATED = 788;
     const USER_EMPTY_NAME = 789;
     const USER_EMPTY_EMAIL = 790;
     const USER_EMPTY_PASSWORD = 791;
@@ -26,4 +27,11 @@ class Exceptions
     const EMPTY_EVENT_DATE_TIME = 806;
     const EMPTY_EVENT_PARTIC_LIMIT = 807;
     const USER_WITHOUT_COMPANY = 808;
+    const EVENT_NOT_SELECTED = 809;
+    const EMPTY_PAYMENT = 810;
+    const PAYMENT_CARD_NUMBER = 811;
+    const PAYMENT_HOLDER = 812;
+    const PAYMENT_EXPIRATION = 813;
+    const PAYMENT_SECURITY_CODE = 814;
+    const PAYMENT_CARD_NUMBER_INVALID = 815;
 }

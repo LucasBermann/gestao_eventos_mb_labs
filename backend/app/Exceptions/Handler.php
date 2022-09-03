@@ -44,6 +44,13 @@ class Handler extends ExceptionHandler
         $msg = $exception->getMessage();
         $code = $exception->getCode();
 
+        if ($msg === 'Unauthenticated.') {
+            $msg = ExceptionsTranslation::getMessage(
+                Exceptions::UNAUTHENTICATED
+            );
+            $code = Exceptions::UNAUTHENTICATED;
+        }
+
         if (!ExceptionsTranslation::isCatalogedError($msg)) {
             $log = new Log([
                 'code' => $code,

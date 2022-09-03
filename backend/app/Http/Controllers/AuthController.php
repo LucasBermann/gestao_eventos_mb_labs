@@ -12,19 +12,18 @@ class AuthController extends Controller
 {
     public function authenticate(Request $request)
     {
-        $credentials = $request->validate(
-            [
-                'email' => 'required',
-                'password' => 'required'
-            ],
-            [
-                'email.required' => ExceptionsTranslation::getMessage(
-                    Exceptions::USER_EMPTY_EMAIL
-                ),
-                'password.required' => ExceptionsTranslation::getMessage(
-                    Exceptions::USER_EMPTY_PASSWORD
-                )
-            ]
+        $credentials = [
+            'email' => $request->email ?? '',
+            'password' => $request->password ?? ''
+        ];
+
+        ExceptionsTranslation::validate(
+            !!$credentials['email'],
+            Exceptions::USER_EMPTY_EMAIL
+        );
+        ExceptionsTranslation::validate(
+            !!$credentials['password'],
+            Exceptions::USER_EMPTY_PASSWORD
         );
 
         if (Auth::attempt($credentials)) {
@@ -38,7 +37,9 @@ class AuthController extends Controller
             '',
             ExceptionsTranslation::getMessage(
                 Exceptions::UNAUTHORIZED
-            )
+            ),
+            null,
+            Exceptions::UNAUTHORIZED
         );
     }
 

@@ -8,7 +8,6 @@ use App\Models\User;
 use App\Tools\Helpers\StringFormaterHelper;
 use App\Tools\Translation\Exceptions;
 use App\Tools\Translation\ExceptionsTranslation;
-use Exception;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller {
