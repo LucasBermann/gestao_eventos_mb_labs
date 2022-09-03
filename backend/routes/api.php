@@ -33,6 +33,8 @@ Route::group([ 'prefix' => 'app' ], function() {
         Route::get('event/{eventId}', 'App\Http\Controllers\EventController@show');
         Route::get('event', 'App\Http\Controllers\EventController@index');
         Route::post('event-participation', 'App\Http\Controllers\EventParticipationController@createEventParticipation');
+        Route::get('event-participation', 'App\Http\Controllers\EventParticipationController@index');
+        Route::get('event-participation/{participId}', 'App\Http\Controllers\EventParticipationController@show');
     });
 });
 
