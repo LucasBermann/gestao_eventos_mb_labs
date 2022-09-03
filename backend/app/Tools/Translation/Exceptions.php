@@ -5,6 +5,7 @@ namespace App\Tools\Translation;
 
 class Exceptions
 {
+    const DEFAULT_ERROR = 444;
     const USER_EMPTY_NAME = 789;
     const USER_EMPTY_EMAIL = 790;
     const USER_EMPTY_PASSWORD = 791;
@@ -19,4 +20,10 @@ class Exceptions
     const EMPTY_BIRTH = 800;
     const EMPTY_USER = 801;
     const USER_NOT_ADMIN = 802;
+    const EMPTY_EVENT_DESCRIPTION = 803;
+    const EMPTY_EVENT_CATEGORY = 804;
+    const EMPTY_EVENT_LOCATION = 805;
+    const EMPTY_EVENT_DATE_TIME = 806;
+    const EMPTY_EVENT_PARTIC_LIMIT = 807;
+    const USER_WITHOUT_COMPANY = 808;
 }

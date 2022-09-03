@@ -2,6 +2,9 @@
 
 namespace App\Exceptions;
 
+use App\Models\Log;
+use App\Tools\Translation\Exceptions;
+use App\Tools\Translation\ExceptionsTranslation;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -38,10 +41,28 @@ class Handler extends ExceptionHandler
      */
     public function render($request, \Throwable $exception)
     {
+        $msg = $exception->getMessage();
+        $code = $exception->getCode();
+
+        if (!ExceptionsTranslation::isCatalogedError($msg)) {
+            $log = new Log([
+                'code' => $code,
+                'message' => $msg,
+                'file' => $exception->getFile(),
+                'line' => $exception->getLine(),
+            ]);
+            $log->save();
+
+            $msg = ExceptionsTranslation::getMessage(
+                Exceptions::DEFAULT_ERROR
+            );
+            $code = Exceptions::DEFAULT_ERROR;
+        }
+
         return response()->json([
             'info' => 'error',
-            'code' => $exception->getCode(),
-            'message' => $exception->getMessage(),
+            'code' => $code,
+            'message' => $msg,
         ], 400);
     }
 

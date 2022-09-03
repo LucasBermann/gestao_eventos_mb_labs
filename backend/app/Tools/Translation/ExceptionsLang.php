@@ -16,4 +16,9 @@ class ExceptionsLang
     {
         return $this->msgs[$code];
     }
+
+    public function isCatalogedError($msg) : bool
+    {
+        return in_array($msg, $this->msgs);
+    }
 }

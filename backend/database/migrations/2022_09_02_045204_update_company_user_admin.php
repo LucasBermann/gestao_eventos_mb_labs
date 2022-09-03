@@ -16,6 +16,9 @@ class UpdateCompanyUserAdmin extends Migration
         Schema::table('companies', function (Blueprint $table) {
             $table->unsignedBigInteger('user_admin_id')->required();
         });
+        Schema::table('companies', function (Blueprint $table) {
+            $table->foreign('user_admin_id')->references('id')->on('users');
+        });
     }
 
     /**

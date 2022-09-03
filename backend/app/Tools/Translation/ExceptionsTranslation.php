@@ -25,15 +25,25 @@ class ExceptionsTranslation
             );
         }
     }
-    public static function throwNow(int $code) {
+
+    public static function throwNow(int $code)
+    {
         $exceptionLang = new self::$languages[env('LANGUAGE', 'ptbr')]();
         throw new Exception(
             $exceptionLang->getMessage($code),
             $code
         );
     }
-    public static function getMessage(int $code) {
+
+    public static function getMessage(int $code)
+    {
         $exceptionLang = new self::$languages[env('LANGUAGE', 'ptbr')]();
         return $exceptionLang->getMessage($code);
+    }
+
+    public static function isCatalogedError($msg) : bool
+    {
+        $exceptionLang = new self::$languages[env('LANGUAGE', 'ptbr')]();
+        return $exceptionLang->isCatalogedError($msg);
     }
 }

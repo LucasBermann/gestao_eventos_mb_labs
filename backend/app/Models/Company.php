@@ -16,8 +16,22 @@ class Company extends Model
         'user_admin_id',
     ];
 
+    protected $appends = [
+        'events',
+    ];
+
     public function userAdmin()
     {
         return $this->belongsTo(Company::class, 'user_admin_id', 'id');
+    }
+
+    public function getEventsAttribute()
+    {
+        return $this->events()->get()->all();
+    }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class, 'company_id');
     }
 }

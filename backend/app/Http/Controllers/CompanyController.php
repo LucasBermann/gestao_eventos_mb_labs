@@ -12,6 +12,16 @@ use Exception;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller {
+    public function index()
+    {
+        return Company::all();
+    }
+
+    public function show($id)
+    {
+        return Company::where('id', $id)->first();
+    }
+
     public function createCompany(Request $request)
     {
         $name = $request->name ?? '';

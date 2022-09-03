@@ -35,6 +35,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $appends = [
+        'events',
+        'company',
+    ];
+
     /**
      * The attributes that should be cast.
      *
@@ -49,8 +54,23 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
+    public function getCompanyAttribute()
+    {
+        return $this->company()->get()->first();
+    }
+
     public function company()
     {
         return $this->belongsTo(Company::class, 'company_id', 'id');
+    }
+
+    public function getEventsAttribute()
+    {
+        return $this->events()->get()->all();
+    }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class, 'user_registration_id');
     }
 }

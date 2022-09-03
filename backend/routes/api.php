@@ -15,13 +15,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group([ 'prefix' => 'app' ], function() {
-    Route::post('create-user', 'App\Http\Controllers\UserController@createUser');
+    Route::post('user', 'App\Http\Controllers\UserController@createUser');
     Route::post('login', 'App\Http\Controllers\AuthController@authenticate');
 
     Route::middleware('auth:sanctum')->group(function() {
+        Route::get('user/{userId}', 'App\Http\Controllers\UserController@show');
+        Route::get('user', 'App\Http\Controllers\UserController@index');
         Route::post('logout', 'App\Http\Controllers\AuthController@logout');
-        Route::post('create-company', 'App\Http\Controllers\CompanyController@createCompany');
+        Route::post('company', 'App\Http\Controllers\CompanyController@createCompany');
         Route::put('company/add-user/{companyId}', 'App\Http\Controllers\CompanyController@addUserInCompany');
+        Route::get('company/{companyId}', 'App\Http\Controllers\CompanyController@show');
+        Route::get('company', 'App\Http\Controllers\CompanyController@index');
+        Route::post('event', 'App\Http\Controllers\EventController@createEvent');
+        Route::get('event/{eventId}', 'App\Http\Controllers\EventController@show');
+        Route::get('event', 'App\Http\Controllers\EventController@index');
     });
 });
 

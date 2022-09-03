@@ -10,6 +10,16 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class UserController extends Controller {
+    public function index()
+    {
+        return User::all();
+    }
+
+    public function show($id)
+    {
+        return User::where('id', $id)->first();
+    }
+
     public function createUser(Request $request)
     {
         $name = $request->name ?? '';
