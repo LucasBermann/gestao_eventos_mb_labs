@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Tools\Helpers\StringFormaterHelper;
 use App\Tools\Translation\Exceptions;
 use App\Tools\Translation\ExceptionsTranslation;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use DateTime;
 
 class EventController extends Controller {
     public function index()
     {
-        return Event::all();
+        return Event::search(request('search', '{}'));
     }
 
     public function show($id)
@@ -55,17 +57,28 @@ class EventController extends Controller {
             Exceptions::USER_WITHOUT_COMPANY
         );
 
+        $this->validateDate($request);
+
         $event = new Event([
             'description' => $description,
             'category' => $category,
             'location' => $location,
             'eventDateTime' => new Carbon($eventDateTime),
             'participantsLimit' => $participantsLimit,
-            'price' => $price,
+            'price' => StringFormaterHelper::onlyNumbers($price),
             'ageMin' => $ageMin,
             'user_registration_id' => $request->user()->id,
             'company_id' => $request->user()->company_id,
         ]);
         $event->save();
+    }
+
+    private function validateDate($request)
+    {
+        $eventDate = new DateTime($request->eventDateTime);
+        ExceptionsTranslation::validate(
+            $eventDate > new DateTime(date('Y-m-d')),
+            Exceptions::EVENT_DATE_LASS_THAN_CURRENT
+        );
     }
 }

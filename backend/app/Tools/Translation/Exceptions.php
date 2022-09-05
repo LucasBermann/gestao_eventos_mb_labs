@@ -34,4 +34,13 @@ class Exceptions
     const PAYMENT_EXPIRATION = 813;
     const PAYMENT_SECURITY_CODE = 814;
     const PAYMENT_CARD_NUMBER_INVALID = 815;
+    const TICKETS_SOLD_OUT = 816;
+    const INCOMPATIBLE_AGE = 817;
+    const USER_ALREADY_LINKED = 818;
+    const EVENT_DATE_LASS_THAN_CURRENT = 819;
+    const OLD_EVENT = 820;
+    const USER_NOT_LINKED = 821;
+    const PWD_NOT_MATCH = 822;
+    const PWD_NOT_SECURE = 823;
+    const BIRTH_DATE_INVALID = 824;
 }

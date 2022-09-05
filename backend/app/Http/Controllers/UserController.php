@@ -7,12 +7,13 @@ use App\Models\User;
 use App\Tools\Translation\Exceptions;
 use App\Tools\Translation\ExceptionsTranslation;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 
 class UserController extends Controller {
     public function index()
     {
-        return User::all();
+        return User::search(request('search', '{}'));
     }
 
     public function show($id)
@@ -20,11 +21,18 @@ class UserController extends Controller {
         return User::where('id', $id)->first();
     }
 
+    public function loggedUser(Request $request)
+    {
+        return User::query()->where('id', '=', $request->user()->id)
+            ->with('company')->get()->first();
+    }
+
     public function createUser(Request $request)
     {
         $name = $request->name ?? '';
         $email = $request->email ?? '';
         $password = $request->password ?? '';
+        $confirmPassword = $request->confirmPassword ?? '';
         $birth = $request->birth ?? null;
         $company_id = $request->company_id ?? null;
 
@@ -41,8 +49,23 @@ class UserController extends Controller {
             Exceptions::USER_EMPTY_PASSWORD
         );
         ExceptionsTranslation::validate(
+            $password === $confirmPassword,
+            Exceptions::PWD_NOT_MATCH
+        );
+        ExceptionsTranslation::validate(
+            strlen($password) >= 6 ,
+            Exceptions::PWD_NOT_SECURE
+        );
+
+        ExceptionsTranslation::validate(
             !!$birth,
             Exceptions::EMPTY_BIRTH
+        );
+
+        $birthDate = new DateTime($birth);
+        ExceptionsTranslation::validate(
+            new DateTime(date('Y-m-d')) > $birthDate,
+            Exceptions::BIRTH_DATE_INVALID
         );
 
         $user = new User([

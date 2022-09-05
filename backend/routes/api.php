@@ -21,12 +21,10 @@ Route::group([ 'prefix' => 'app' ], function() {
     Route::middleware('auth:sanctum')->group(function() {
         Route::get('user/{userId}', 'App\Http\Controllers\UserController@show');
         Route::get('user', 'App\Http\Controllers\UserController@index');
-        Route::get('logged-user', function (Request $request) {
-            return $request->user();
-        });
+        Route::get('logged-user', 'App\Http\Controllers\UserController@loggedUser');
         Route::post('logout', 'App\Http\Controllers\AuthController@logout');
         Route::post('company', 'App\Http\Controllers\CompanyController@createCompany');
-        Route::put('company/add-user/{companyId}', 'App\Http\Controllers\CompanyController@addUserInCompany');
+        Route::put('company/link-user/{companyId}', 'App\Http\Controllers\CompanyController@linkUserCompany');
         Route::get('company/{companyId}', 'App\Http\Controllers\CompanyController@show');
         Route::get('company', 'App\Http\Controllers\CompanyController@index');
         Route::post('event', 'App\Http\Controllers\EventController@createEvent');

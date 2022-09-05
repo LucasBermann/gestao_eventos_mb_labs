@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Intermediary\IModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class Company extends Model
+class Company extends IModel
 {
     use HasFactory;
 
@@ -16,19 +16,19 @@ class Company extends Model
         'user_admin_id',
     ];
 
-    protected $appends = [
-        'events',
-    ];
+    // protected $appends = [
+    //     'events',
+    // ];
 
     public function userAdmin()
     {
-        return $this->belongsTo(Company::class, 'user_admin_id', 'id');
+        return $this->belongsTo(User::class, 'user_admin_id', 'id');
     }
 
-    public function getEventsAttribute()
-    {
-        return $this->events()->get()->all();
-    }
+    // public function getEventsAttribute()
+    // {
+    //     return $this->events()->get()->all();
+    // }
 
     public function events()
     {

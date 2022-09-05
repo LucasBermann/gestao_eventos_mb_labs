@@ -38,6 +38,15 @@ class ExceptionsPtBr extends ExceptionsLang
                 Exceptions::PAYMENT_EXPIRATION => 'Erro - Data de vencimento do cartão não informada',
                 Exceptions::PAYMENT_SECURITY_CODE => 'Erro - Cvv não informado',
                 Exceptions::PAYMENT_CARD_NUMBER_INVALID => 'Erro - Número do cartão inválido',
+                Exceptions::TICKETS_SOLD_OUT => 'Erro - Ingressos esgotados!',
+                Exceptions::INCOMPATIBLE_AGE => 'Erro - Idade incompatível com o evento!',
+                Exceptions::USER_ALREADY_LINKED => 'Erro - Você já comprou ingresso para este evento!',
+                Exceptions::EVENT_DATE_LASS_THAN_CURRENT => 'Erro - Data/Hora do evento deve ser maior que a data/hora atual!',
+                Exceptions::OLD_EVENT => 'Erro - Este evento já expirou!',
+                Exceptions::USER_NOT_LINKED => 'Erro - Usuário não vinculado à empresa!',
+                Exceptions::PWD_NOT_MATCH => 'Erro - As senhas informadas não são iguais!',
+                Exceptions::PWD_NOT_SECURE => 'Erro - A senha precisa ter pelo menos 6 digitos!',
+                Exceptions::BIRTH_DATE_INVALID => 'Erro - A data de nascimento deve ser menor que a data atual!',
             ]
         );
     }

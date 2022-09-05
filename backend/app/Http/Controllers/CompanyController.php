@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 class CompanyController extends Controller {
     public function index()
     {
-        return Company::all();
+        return Company::search(request('search', '{}'));
     }
 
     public function show($id)
@@ -78,10 +78,11 @@ class CompanyController extends Controller {
         }
     }
 
-    public function addUserInCompany($companyId, Request $request)
+    public function linkUserCompany($companyId, Request $request)
     {
-        $userId = $request->userId ?? '';
         $companyId = $request->companyId ?? '';//não requer valid, sempre deverá vir na url
+        $userId = $request->userId ?? '';
+        $unlink = $request->unlink ?? false;
 
         ExceptionsTranslation::validate(
             !!$userId,
@@ -96,7 +97,13 @@ class CompanyController extends Controller {
         );
 
         $userLoaded = User::where('id', $userId)->first();
-        $userLoaded->company_id = $companyId;
+
+        ExceptionsTranslation::validate(
+            !$unlink || (int)$userLoaded->company_id === (int)$companyId,
+            Exceptions::USER_NOT_LINKED
+        );
+
+        $userLoaded->company_id = $unlink? null : $companyId;
         $userLoaded->save();
     }
 }

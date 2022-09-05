@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Intermediary\UserAuth;
 
-class User extends Authenticatable
+class User extends UserAuth
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -35,10 +34,10 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    protected $appends = [
-        'events',
-        'company',
-    ];
+    // protected $appends = [
+    //     'events',
+    //     'company',
+    // ];
 
     /**
      * The attributes that should be cast.
@@ -54,20 +53,20 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
-    public function getCompanyAttribute()
-    {
-        return $this->company()->get()->first();
-    }
+    // public function getCompanyAttribute()
+    // {
+    //     return $this->company()->get()->first();
+    // }
 
     public function company()
     {
         return $this->belongsTo(Company::class, 'company_id', 'id');
     }
 
-    public function getEventsAttribute()
-    {
-        return $this->events()->get()->all();
-    }
+    // public function getEventsAttribute()
+    // {
+    //     return $this->events()->get()->all();
+    // }
 
     public function events()
     {

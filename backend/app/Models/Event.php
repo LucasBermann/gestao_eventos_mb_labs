@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Intermediary\IModel;
 
-class Event extends Model
+class Event extends IModel
 {
     use HasFactory;
 
@@ -20,4 +20,13 @@ class Event extends Model
         'user_registration_id',
         'company_id',
     ];
+
+    public function userRegistration()
+    {
+        return $this->belongsTo(User::class, 'user_registration_id', 'id');
+    }
+    public function company()
+    {
+        return $this->belongsTo(Company::class, 'company_id', 'id');
+    }
 }

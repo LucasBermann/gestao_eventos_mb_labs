@@ -27,10 +27,18 @@ class AuthController extends Controller
         );
 
         if (Auth::attempt($credentials)) {
-            $user = User::query()->where('email', '=', $request->email)->get()->first();
+            $user = User::query()->where('email', '=', $request->email)->with('company')->get()->first();
             $token = $user->createToken('login'. $request->email);
 
-            return [ 'data' => explode('|', $token->plainTextToken)[1] ];
+            return [
+                'token' => explode('|', $token->plainTextToken)[1],
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'birth' => $user->birth,
+                'company_id' => $user->company_id,
+                'company' => $user->company
+            ];
         }
 
         throw new UnauthorizedHttpException(

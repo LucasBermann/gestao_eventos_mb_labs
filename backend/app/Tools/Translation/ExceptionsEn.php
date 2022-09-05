@@ -38,6 +38,15 @@ class ExceptionsEn extends ExceptionsLang
                 Exceptions::PAYMENT_EXPIRATION => 'Error - Expiration date must be provided',
                 Exceptions::PAYMENT_SECURITY_CODE => 'Error - Security code must be provided',
                 Exceptions::PAYMENT_CARD_NUMBER_INVALID => 'Error - Invalid card number',
+                Exceptions::TICKETS_SOLD_OUT => 'Error - Tickets are sold out!',
+                Exceptions::INCOMPATIBLE_AGE => 'Error - age incompatible with the event!',
+                Exceptions::USER_ALREADY_LINKED => 'Error - You have already purchased tickets for this event!',
+                Exceptions::EVENT_DATE_LASS_THAN_CURRENT => 'Error - Event date less than current date!',
+                Exceptions::OLD_EVENT => 'This event has already expired!',
+                Exceptions::USER_NOT_LINKED => 'Error - Unlinked user!',
+                Exceptions::PWD_NOT_MATCH => 'Error - As senhas informadas não são iguais!',
+                Exceptions::PWD_NOT_SECURE => 'Error - Password must be at least 6 digits long!',
+                Exceptions::BIRTH_DATE_INVALID => 'Error - The date of birth must be less than the current date!',
             ]
         );
     }
